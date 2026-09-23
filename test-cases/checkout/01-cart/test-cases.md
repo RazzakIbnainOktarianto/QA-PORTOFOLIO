@@ -2,14 +2,21 @@
 
 ## Coverage Summary
 
+### Test Outcome
+
 | Category | Coverage |
 |---|---:|
-| Positive | 7 |
+| Positive | 8 |
 | Negative | 4 |
+| **Total Test Cases** | **12** |
+
+### Testing Approach
+
+| Category | Coverage |
+|---|---:|
+| Functional | 12 |
 | Boundary | 2 |
-| Edge Case | 0 |
-| Functional | 11 |
-| **Total** | **11** |
+| Edge Case | 1 |
 
 ---
 
@@ -449,5 +456,44 @@ The cart total is calculated correctly as:
 `$110.00 + $11.00 + $5.00 = $126.00`
 
 The displayed cart total is **$126.00**.
+
+---
+## TC-CART-012 — Preserve Cart Data After Page Refresh
+
+**Test Type:** Edge Case · Positive
+
+### Description
+
+Verify that the user's cart data remains unchanged after refreshing the cart page.
+
+### Precondition
+
+- User has at least one available product in the shopping cart.
+- The product quantity and cart total are correctly displayed.
+- The cart is accessible.
+
+### Parameter
+
+| Parameter | Value |
+|---|---|
+| Product | Wireless Headphones |
+| Quantity | 2 |
+| Product Unit Price | $50.00 |
+| Expected Subtotal | $100.00 |
+
+### Test Steps
+
+```gherkin
+Given the user has a product with quantity 2 in the shopping cart
+When the user refreshes the cart page
+Then the product remains in the shopping cart with quantity 2
+And the product price remains unchanged
+And the cart subtotal remains $100.00
+And the cart total remains correctly calculated
+```
+
+### Expected Result
+
+The cart data remains unchanged after the page refresh, including the product, quantity, price, subtotal, and total.
 
 ---
