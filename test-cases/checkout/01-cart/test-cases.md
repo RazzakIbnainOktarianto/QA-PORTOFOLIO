@@ -6,10 +6,10 @@
 |---|---:|
 | Positive | 5 |
 | Negative | 2 |
-| Boundary | 0 |
+| Boundary | 1 |
 | Edge Case | 0 |
-| Functional | 7 |
-| **Total** | **7** |
+| Functional | 8 |
+| **Total** | **8** |
 
 ---
 
@@ -280,3 +280,40 @@ And the cart total remains correctly calculated
 The system prevents the user from setting an invalid product quantity and maintains a valid cart state with the correct cart total.
 
 ---
+## TC-CART-008 — Validate Maximum Product Quantity
+
+**Test Type:** Boundary · Negative
+
+### Description
+
+Verify that the system prevents the user from exceeding the maximum allowed purchase quantity for a product.
+
+### Precondition
+
+- User has an available product in the shopping cart.
+- The product has sufficient stock.
+- The maximum purchase quantity for the product is 10 units.
+- The cart is accessible.
+
+### Parameter
+
+| Parameter | Value |
+|---|---|
+| Product | Wireless Headphones |
+| Maximum Allowed Quantity | 10 |
+| Current Quantity | 10 |
+| Attempted Quantity | 11 |
+
+### Test Steps
+
+```gherkin
+Given the user has a product in the shopping cart with quantity 10
+When the user attempts to increase the quantity to 11
+Then the product quantity is not increased beyond the maximum allowed quantity of 10
+And an appropriate maximum quantity validation message is displayed
+And the cart total remains correctly calculated based on quantity 10
+```
+
+### Expected Result
+
+The system prevents the product quantity from exceeding the maximum allowed quantity of 10 units, displays an appropriate validation message, and maintains the correct cart total.
