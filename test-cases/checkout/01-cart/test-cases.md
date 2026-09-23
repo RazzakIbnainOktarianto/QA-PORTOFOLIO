@@ -4,12 +4,12 @@
 
 | Category | Coverage |
 |---|---:|
-| Positive | 4 |
+| Positive | 5 |
 | Negative | 0 |
 | Boundary | 0 |
 | Edge Case | 0 |
-| Functional | 4 |
-| **Total** | **4** |
+| Functional | 5 |
+| **Total** | **5** |
 
 ---
 
@@ -162,5 +162,45 @@ And the cart total is updated accordingly
 ### Expected Result
 
 The selected product is successfully removed from the shopping cart, and the cart subtotal and total are recalculated correctly based on the remaining cart items.
+
+---
+
+## TC-CART-005 — Display Empty Cart State
+
+**Test Type:** Functional · Positive
+
+### Description
+
+Verify that the cart displays the correct empty state when all products have been removed.
+
+### Precondition
+
+- User has at least one product in the shopping cart.
+- The cart contains only one product.
+- The cart is accessible.
+
+### Parameter
+
+| Parameter | Value |
+|---|---|
+| Product | Wireless Headphones |
+| Current Quantity | 1 |
+| Expected Cart Items | 0 |
+| Expected Cart Total | $0.00 |
+
+### Test Steps
+
+```gherkin
+Given the user has one product in the shopping cart
+When the user removes the product from the cart
+Then the cart displays the empty state
+And no product items are displayed in the cart
+And the cart total is updated to $0.00
+And the user is shown an option to continue shopping
+```
+
+### Expected Result
+
+The cart successfully displays the empty state with no remaining products, the cart total is $0.00, and the user can continue shopping.
 
 ---
