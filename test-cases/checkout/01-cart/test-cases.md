@@ -6,15 +6,15 @@
 
 | Category | Coverage |
 |---|---:|
-| Positive | 8 |
+| Positive | 9 |
 | Negative | 4 |
-| **Total Test Cases** | **12** |
+| **Total Test Cases** | **13** |
 
 ### Testing Approach
 
 | Category | Coverage |
 |---|---:|
-| Functional | 12 |
+| Functional | 13 |
 | Boundary | 2 |
 | Edge Case | 1 |
 
@@ -497,3 +497,47 @@ And the cart total remains correctly calculated
 The cart data remains unchanged after the page refresh, including the product, quantity, price, subtotal, and total.
 
 ---
+
+## TC-CART-013 — Calculate Subtotal for Multiple Products
+
+**Test Type:** Functional · Positive
+
+### Description
+
+Verify that the cart subtotal is calculated correctly when multiple products with different quantities are added to the shopping cart.
+
+### Precondition
+
+- User has access to the shopping cart.
+- Multiple products are available for purchase.
+- Product prices are correctly configured.
+
+### Parameter
+
+| Parameter | Value |
+|---|---:|
+| Product A | Wireless Headphones |
+| Product A Unit Price | $50.00 |
+| Product A Quantity | 2 |
+| Product B | USB-C Cable |
+| Product B Unit Price | $10.00 |
+| Product B Quantity | 3 |
+| Expected Subtotal | $130.00 |
+
+### Test Steps
+
+```gherkin
+Given the user has multiple products with different quantities in the shopping cart
+When the user views the cart subtotal
+Then each product subtotal is calculated based on its unit price and quantity
+And all product subtotals are combined into the cart subtotal
+And the displayed cart subtotal is $130.00
+```
+
+### Expected Result
+
+The cart subtotal is calculated correctly as:
+
+`($50.00 × 2) + ($10.00 × 3) = $130.00`
+
+The displayed cart subtotal is **$130.00**.
