@@ -7,16 +7,17 @@
 | Category | Coverage |
 |---|---:|
 | Positive | 10 |
-| Negative | 4 |
-| **Total Test Cases** | **14** |
+| Negative | 5 |
+| **Total Test Cases** | **15** |
 
 ### Testing Approach
 
 | Category | Coverage |
 |---|---:|
-| Functional | 14 |
+| Functional | 15 |
 | Boundary | 2 |
 | Edge Case | 2 |
+| Business Rule | 1 |
 
 ---
 
@@ -581,5 +582,47 @@ And the cart total remains correctly calculated
 ### Expected Result
 
 The cart data remains unchanged after browser navigation, including the product, quantity, price, subtotal, and total.
+
+---
+
+## TC-CART-015 — Prevent Quantity from Exceeding Available Stock
+
+**Test Type:** Business Rule · Negative
+
+### Description
+
+Verify that the system prevents the user from increasing the product quantity beyond the available stock.
+
+### Precondition
+
+- User has an available product in the shopping cart.
+- The product has limited available stock.
+- The maximum purchase quantity is higher than the available stock.
+- The cart is accessible.
+
+### Parameter
+
+| Parameter | Value |
+|---|---:|
+| Product | Wireless Headphones |
+| Available Stock | 3 |
+| Maximum Purchase Quantity | 10 |
+| Current Quantity | 3 |
+| Attempted Quantity | 4 |
+
+### Test Steps
+
+```gherkin
+Given the user has a product with quantity 3 in the shopping cart and only 3 units are available
+When the user attempts to increase the product quantity to 4
+Then the product quantity is not increased beyond the available stock
+And an appropriate stock availability message is displayed
+And the product quantity remains 3
+And the cart total remains correctly calculated based on quantity 3
+```
+
+### Expected Result
+
+The system prevents the user from purchasing more units than the available stock. The product quantity remains at 3, an appropriate stock availability message is displayed, and the cart total remains correctly calculated.
 
 ---
