@@ -6,10 +6,10 @@
 |---|---:|
 | Positive | 5 |
 | Negative | 2 |
-| Boundary | 1 |
+| Boundary | 2 |
 | Edge Case | 0 |
-| Functional | 8 |
-| **Total** | **8** |
+| Functional | 9 |
+| **Total** | **9** |
 
 ---
 
@@ -317,3 +317,45 @@ And the cart total remains correctly calculated based on quantity 10
 ### Expected Result
 
 The system prevents the product quantity from exceeding the maximum allowed quantity of 10 units, displays an appropriate validation message, and maintains the correct cart total.
+
+---
+
+## TC-CART-009 — Validate Minimum Product Quantity
+
+**Test Type:** Boundary · Negative
+
+### Description
+
+Verify that the system prevents the product quantity from being set below the minimum allowed quantity.
+
+### Precondition
+
+- User has an available product in the shopping cart.
+- The product quantity is currently 1.
+- The cart is accessible.
+- The minimum allowed product quantity is 1.
+
+### Parameter
+
+| Parameter | Value |
+|---|---|
+| Product | Wireless Headphones |
+| Minimum Allowed Quantity | 1 |
+| Current Quantity | 1 |
+| Attempted Quantity | 0 |
+
+### Test Steps
+
+```gherkin
+Given the user has a product in the shopping cart with quantity 1
+When the user attempts to decrease the quantity to 0
+Then the product quantity is not reduced below the minimum allowed quantity
+And the system prevents the cart from containing an invalid quantity
+And the cart total remains correctly calculated
+```
+
+### Expected Result
+
+The system prevents the product quantity from being reduced below 1 and maintains a valid cart state with the correct cart total.
+
+---
