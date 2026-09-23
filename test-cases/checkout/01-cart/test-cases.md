@@ -4,12 +4,12 @@
 
 | Category | Coverage |
 |---|---:|
-| Positive | 6 |
+| Positive | 7 |
 | Negative | 4 |
 | Boundary | 2 |
 | Edge Case | 0 |
-| Functional | 10 |
-| **Total** | **10** |
+| Functional | 11 |
+| **Total** | **11** |
 
 ---
 
@@ -406,3 +406,48 @@ The displayed cart subtotal is **$110.00**.
 
 ---
 
+## TC-CART-011 — Validate Cart Total Calculation
+
+**Test Type:** Functional · Positive
+
+### Description
+
+Verify that the cart total is calculated correctly based on the subtotal, applicable tax, and service fee.
+
+### Precondition
+
+- User has products in the shopping cart.
+- Product prices are correctly configured.
+- The applicable tax rate is configured as 10%.
+- The applicable service fee is configured as $5.00.
+- The cart is accessible.
+
+### Parameter
+
+| Parameter | Value |
+|---|---:|
+| Product Subtotal | $110.00 |
+| Tax Rate | 10% |
+| Tax Amount | $11.00 |
+| Service Fee | $5.00 |
+| Expected Cart Total | $126.00 |
+
+### Test Steps
+
+```gherkin
+Given the user's cart has a subtotal of $110.00
+When the user views the cart total
+Then the tax is calculated as 10% of the subtotal
+And the service fee of $5.00 is added to the subtotal and tax
+And the displayed cart total is $126.00
+```
+
+### Expected Result
+
+The cart total is calculated correctly as:
+
+`$110.00 + $11.00 + $5.00 = $126.00`
+
+The displayed cart total is **$126.00**.
+
+---
