@@ -6,17 +6,17 @@
 
 | Category | Coverage |
 |---|---:|
-| Positive | 9 |
+| Positive | 10 |
 | Negative | 4 |
-| **Total Test Cases** | **13** |
+| **Total Test Cases** | **14** |
 
 ### Testing Approach
 
 | Category | Coverage |
 |---|---:|
-| Functional | 13 |
+| Functional | 14 |
 | Boundary | 2 |
-| Edge Case | 1 |
+| Edge Case | 2 |
 
 ---
 
@@ -541,3 +541,45 @@ The cart subtotal is calculated correctly as:
 `($50.00 × 2) + ($10.00 × 3) = $130.00`
 
 The displayed cart subtotal is **$130.00**.
+
+---
+
+## TC-CART-014 — Preserve Cart After Browser Navigation
+
+**Test Type:** Edge Case · Positive
+
+### Description
+
+Verify that the user's cart data remains unchanged after navigating to another page and returning to the cart.
+
+### Precondition
+
+- User has at least one available product in the shopping cart.
+- The product quantity and cart total are correctly displayed.
+- The user can navigate between pages within the application.
+
+### Parameter
+
+| Parameter | Value |
+|---|---|
+| Product | Wireless Headphones |
+| Quantity | 2 |
+| Product Unit Price | $50.00 |
+| Expected Subtotal | $100.00 |
+
+### Test Steps
+
+```gherkin
+Given the user has a product with quantity 2 in the shopping cart
+When the user navigates to another page and then returns to the shopping cart
+Then the product remains in the shopping cart with quantity 2
+And the product price remains unchanged
+And the cart subtotal remains $100.00
+And the cart total remains correctly calculated
+```
+
+### Expected Result
+
+The cart data remains unchanged after browser navigation, including the product, quantity, price, subtotal, and total.
+
+---
