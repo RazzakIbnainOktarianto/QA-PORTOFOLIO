@@ -29,7 +29,21 @@ QA Engineer with experience in manual testing, functional testing, API testing, 
 
 ### QA Portfolio
 
-This repository contains demonstration projects and testing artifacts created to showcase my QA skills and testing methodology.
+This repository contains demonstration projects and testing artifacts created to showcase my QA skills, testing methodology, and practical approach to software quality.
+
+### Demonstration Projects
+
+- Manual Testing
+- Test Case Design
+- Functional Testing
+- Positive & Negative Testing
+- Boundary & Edge Case Testing
+- Business Rule Validation
+- API Testing
+- Regression Testing
+- End-to-End Testing
+
+> **Note:** All projects, test cases, data, business rules, and scenarios in this repository are fictional and created for demonstration purposes. No confidential company information, customer data, internal documentation, or proprietary testing artifacts are included.
 
 ### Contact
 
