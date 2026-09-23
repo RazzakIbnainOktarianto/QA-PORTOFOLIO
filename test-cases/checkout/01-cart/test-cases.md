@@ -4,12 +4,12 @@
 
 | Category | Coverage |
 |---|---:|
-| Positive | 5 |
-| Negative | 2 |
+| Positive | 6 |
+| Negative | 4 |
 | Boundary | 2 |
 | Edge Case | 0 |
-| Functional | 9 |
-| **Total** | **9** |
+| Functional | 10 |
+| **Total** | **10** |
 
 ---
 
@@ -359,3 +359,50 @@ And the cart total remains correctly calculated
 The system prevents the product quantity from being reduced below 1 and maintains a valid cart state with the correct cart total.
 
 ---
+
+## TC-CART-010 — Validate Cart Subtotal Calculation
+
+**Test Type:** Functional · Positive
+
+### Description
+
+Verify that the cart subtotal is calculated correctly based on the product price and selected quantity.
+
+### Precondition
+
+- User has products in the shopping cart.
+- Product prices are correctly configured.
+- The cart is accessible.
+
+### Parameter
+
+| Parameter | Value |
+|---|---:|
+| Product A | Wireless Headphones |
+| Product A Unit Price | $50.00 |
+| Product A Quantity | 2 |
+| Product B | USB-C Cable |
+| Product B Unit Price | $10.00 |
+| Product B Quantity | 1 |
+| Expected Subtotal | $110.00 |
+
+### Test Steps
+
+```gherkin
+Given the user has multiple products with known prices and quantities in the shopping cart
+When the user views the cart subtotal
+Then the subtotal is calculated by multiplying each product price by its quantity
+And the subtotal includes all products in the cart
+And the displayed subtotal is $110.00
+```
+
+### Expected Result
+
+The cart subtotal is calculated correctly as:
+
+`($50.00 × 2) + ($10.00 × 1) = $110.00`
+
+The displayed cart subtotal is **$110.00**.
+
+---
+
