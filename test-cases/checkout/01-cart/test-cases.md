@@ -5,11 +5,11 @@
 | Category | Coverage |
 |---|---:|
 | Positive | 5 |
-| Negative | 0 |
+| Negative | 1 |
 | Boundary | 0 |
 | Edge Case | 0 |
-| Functional | 5 |
-| **Total** | **5** |
+| Functional | 6 |
+| **Total** | **6** |
 
 ---
 
@@ -202,5 +202,43 @@ And the user is shown an option to continue shopping
 ### Expected Result
 
 The cart successfully displays the empty state with no remaining products, the cart total is $0.00, and the user can continue shopping.
+
+---
+
+## TC-CART-006 — Prevent Adding Out-of-Stock Product
+
+**Test Type:** Functional · Negative
+
+### Description
+
+Verify that a user cannot add an out-of-stock product to the shopping cart.
+
+### Precondition
+
+- User is on the product listing or product detail page.
+- The selected product is currently out of stock.
+- The product cannot be purchased.
+
+### Parameter
+
+| Parameter | Value |
+|---|---|
+| Product | Wireless Headphones |
+| Available Stock | 0 |
+| Requested Quantity | 1 |
+
+### Test Steps
+
+```gherkin
+Given the user is viewing a product that is out of stock
+When the user attempts to add the product to the shopping cart
+Then the product is not added to the shopping cart
+And an appropriate out-of-stock message is displayed
+And the cart contents remain unchanged
+```
+
+### Expected Result
+
+The out-of-stock product cannot be added to the shopping cart, an appropriate message is displayed, and the existing cart contents remain unchanged.
 
 ---
