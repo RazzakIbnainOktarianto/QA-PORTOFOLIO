@@ -7,17 +7,17 @@
 | Category | Coverage |
 |---|---:|
 | Positive | 10 |
-| Negative | 5 |
-| **Total Test Cases** | **15** |
+| Negative | 6 |
+| **Total Test Cases** | **16** |
 
 ### Testing Approach
 
 | Category | Coverage |
 |---|---:|
-| Functional | 15 |
+| Functional | 16 |
 | Boundary | 2 |
-| Edge Case | 2 |
-| Business Rule | 1 |
+| Edge Case | 3 |
+| Business Rule | 2 |
 
 ---
 
@@ -624,5 +624,46 @@ And the cart total remains correctly calculated based on quantity 3
 ### Expected Result
 
 The system prevents the user from purchasing more units than the available stock. The product quantity remains at 3, an appropriate stock availability message is displayed, and the cart total remains correctly calculated.
+
+---
+
+## TC-CART-016 — Handle Stock Reduction After Product Is Added to Cart
+
+**Test Type:** Edge Case · Business Rule · Negative
+
+### Description
+
+Verify that the system correctly handles a product quantity in the cart when the available stock is reduced after the product has already been added to the cart.
+
+### Precondition
+
+- User has an available product in the shopping cart.
+- The product quantity in the cart is higher than the subsequently available stock.
+- The system supports real-time or refreshed stock validation before checkout.
+
+### Parameter
+
+| Parameter | Value |
+|---|---:|
+| Product | Wireless Headphones |
+| Initial Cart Quantity | 5 |
+| Initial Available Stock | 5 |
+| Updated Available Stock | 3 |
+| Expected Maximum Quantity | 3 |
+
+### Test Steps
+
+```gherkin
+Given the user has 5 units of Wireless Headphones in the shopping cart
+When the available stock is reduced from 5 units to 3 units before the user proceeds to checkout
+Then the system detects that the cart quantity exceeds the available stock
+And the user is informed that only 3 units are currently available
+And the user cannot proceed with an invalid quantity of 5
+And the cart quantity is adjusted or the user is required to update the quantity to 3
+```
+
+### Expected Result
+
+The system detects the stock reduction and prevents the user from proceeding with a quantity that exceeds the current available stock. The user is clearly informed of the available quantity and can update the cart to a valid quantity.
 
 ---
