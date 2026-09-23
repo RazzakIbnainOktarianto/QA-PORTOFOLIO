@@ -4,12 +4,12 @@
 
 | Category | Coverage |
 |---|---:|
-| Positive | 3 |
+| Positive | 4 |
 | Negative | 0 |
 | Boundary | 0 |
 | Edge Case | 0 |
-| Functional | 3 |
-| **Total** | **3** |
+| Functional | 4 |
+| **Total** | **4** |
 
 ---
 
@@ -123,5 +123,44 @@ And the cart total reflects the updated product quantity
 ### Expected Result
 
 The product quantity is successfully decreased to 1, and the cart subtotal and total are recalculated correctly based on the updated quantity.
+
+---
+
+## TC-CART-004 — Remove Product from Cart
+
+**Test Type:** Functional · Positive
+
+### Description
+
+Verify that a user can successfully remove a product from the shopping cart.
+
+### Precondition
+
+- User has at least one product in the shopping cart.
+- The cart contains the product selected for removal.
+- The cart is accessible.
+
+### Parameter
+
+| Parameter | Value |
+|---|---|
+| Product | Wireless Headphones |
+| Current Quantity | 1 |
+| Cart Item Count | 1 |
+
+### Test Steps
+
+```gherkin
+Given the user has a product in the shopping cart
+When the user clicks the "Remove" button for the product
+Then the product is removed from the shopping cart
+And the removed product is no longer displayed in the cart
+And the cart subtotal is recalculated
+And the cart total is updated accordingly
+```
+
+### Expected Result
+
+The selected product is successfully removed from the shopping cart, and the cart subtotal and total are recalculated correctly based on the remaining cart items.
 
 ---
