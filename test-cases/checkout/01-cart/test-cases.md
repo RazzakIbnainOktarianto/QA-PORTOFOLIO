@@ -5,11 +5,11 @@
 | Category | Coverage |
 |---|---:|
 | Positive | 5 |
-| Negative | 1 |
+| Negative | 2 |
 | Boundary | 0 |
 | Edge Case | 0 |
-| Functional | 6 |
-| **Total** | **6** |
+| Functional | 7 |
+| **Total** | **7** |
 
 ---
 
@@ -240,5 +240,43 @@ And the cart contents remain unchanged
 ### Expected Result
 
 The out-of-stock product cannot be added to the shopping cart, an appropriate message is displayed, and the existing cart contents remain unchanged.
+
+---
+
+## TC-CART-007 — Prevent Invalid Product Quantity
+
+**Test Type:** Functional · Negative
+
+### Description
+
+Verify that the user cannot set an invalid quantity for a product in the shopping cart.
+
+### Precondition
+
+- User has an available product in the shopping cart.
+- The product has sufficient stock.
+- The cart is accessible.
+
+### Parameter
+
+| Parameter | Value |
+|---|---|
+| Product | Wireless Headphones |
+| Current Quantity | 1 |
+| Invalid Quantity | 0, -1 |
+
+### Test Steps
+
+```gherkin
+Given the user has an available product with quantity 1 in the shopping cart
+When the user attempts to set the product quantity to an invalid value such as 0 or -1
+Then the product quantity is not updated to the invalid value
+And the cart displays an appropriate validation message or maintains the minimum allowed quantity
+And the cart total remains correctly calculated
+```
+
+### Expected Result
+
+The system prevents the user from setting an invalid product quantity and maintains a valid cart state with the correct cart total.
 
 ---
