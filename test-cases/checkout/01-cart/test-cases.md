@@ -6,18 +6,18 @@
 
 | Category | Coverage |
 |---|---:|
-| Positive | 10 |
+| Positive | 11 |
 | Negative | 6 |
-| **Total Test Cases** | **16** |
+| **Total Test Cases** | **11** |
 
 ### Testing Approach
 
 | Category | Coverage |
 |---|---:|
-| Functional | 16 |
+| Functional | 17 |
 | Boundary | 2 |
 | Edge Case | 3 |
-| Business Rule | 2 |
+| Business Rule | 3 |
 
 ---
 
@@ -665,5 +665,46 @@ And the cart quantity is adjusted or the user is required to update the quantity
 ### Expected Result
 
 The system detects the stock reduction and prevents the user from proceeding with a quantity that exceeds the current available stock. The user is clearly informed of the available quantity and can update the cart to a valid quantity.
+
+---
+
+## TC-CART-017 — Handle Adding the Same Product Multiple Times
+
+**Test Type:** Business Rule · Functional · Positive
+
+### Description
+
+Verify that adding the same product to the shopping cart multiple times combines the quantity into a single cart item instead of creating duplicate cart items.
+
+### Precondition
+
+- User has access to the product listing or product detail page.
+- The product is available for purchase.
+- The product has sufficient stock.
+- The shopping cart is initially empty.
+
+### Parameter
+
+| Parameter | Value |
+|---|---:|
+| Product | Wireless Headphones |
+| First Quantity | 1 |
+| Second Quantity | 2 |
+| Expected Combined Quantity | 3 |
+
+### Test Steps
+
+```gherkin
+Given the user adds 1 unit of Wireless Headphones to the shopping cart
+When the user adds 2 additional units of the same product
+Then the shopping cart contains a single Wireless Headphones item
+And the product quantity is updated to 3
+And no duplicate cart item is created for the same product
+And the cart subtotal is recalculated based on the combined quantity
+```
+
+### Expected Result
+
+The system combines the quantities of the same product into a single cart item. The cart displays Wireless Headphones with a quantity of 3, without creating a duplicate cart item, and the subtotal is recalculated correctly.
 
 ---
