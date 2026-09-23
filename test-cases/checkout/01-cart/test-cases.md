@@ -37,8 +37,7 @@ Verify that a user can successfully add an available product to the shopping car
 
 ### Test Steps
 
-```
-gherkin
+```gherkin
 Given the user is viewing an available product with sufficient stock
 When the user clicks the "Add to Cart" button
 Then the product is added to the shopping cart with quantity 1
@@ -76,8 +75,7 @@ The cart is accessible.
 
 ### Test Steps
 
-```
-Gherkins
+```gherkin
 Given the user has an available product with quantity 1 in the shopping cart
 When the user increases the product quantity to 2
 Then the product quantity is updated to 2
