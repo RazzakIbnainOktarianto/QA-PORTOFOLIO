@@ -7,17 +7,17 @@
 | Category | Coverage |
 |---|---:|
 | Positive | 11 |
-| Negative | 6 |
-| **Total Test Cases** | **11** |
+| Negative | 7 |
+| **Total Test Cases** | **18** |
 
 ### Testing Approach
 
 | Category | Coverage |
 |---|---:|
-| Functional | 17 |
+| Functional | 18 |
 | Boundary | 2 |
 | Edge Case | 3 |
-| Business Rule | 3 |
+| Business Rule | 4 |
 
 ---
 
@@ -706,5 +706,48 @@ And the cart subtotal is recalculated based on the combined quantity
 ### Expected Result
 
 The system combines the quantities of the same product into a single cart item. The cart displays Wireless Headphones with a quantity of 3, without creating a duplicate cart item, and the subtotal is recalculated correctly.
+
+---
+
+## TC-CART-018 — Prevent Combined Quantity from Exceeding Available Stock
+
+**Test Type:** Business Rule · Functional · Negative
+
+### Description
+
+Verify that the system prevents the combined quantity of the same product from exceeding the available stock when the product is added to the cart multiple times.
+
+### Precondition
+
+- User has access to the product listing or product detail page.
+- The product is available for purchase.
+- The shopping cart contains an existing quantity of the product.
+- The product has limited available stock.
+
+### Parameter
+
+| Parameter | Value |
+|---|---:|
+| Product | Wireless Headphones |
+| Available Stock | 5 |
+| Existing Cart Quantity | 3 |
+| Additional Quantity | 3 |
+| Attempted Combined Quantity | 6 |
+| Maximum Valid Quantity | 5 |
+
+### Test Steps
+
+```gherkin
+Given the user has 3 units of Wireless Headphones in the shopping cart and only 5 units are available
+When the user attempts to add 3 additional units of the same product
+Then the system does not allow the combined quantity to exceed the available stock
+And the user is informed that only 5 units are currently available
+And the cart quantity remains at a valid quantity not exceeding 5
+And the cart subtotal is recalculated based on the valid quantity
+```
+
+### Expected Result
+
+The system prevents the combined product quantity from exceeding the available stock of 5 units. The user receives an appropriate stock availability message, and the cart remains in a valid state.
 
 ---
