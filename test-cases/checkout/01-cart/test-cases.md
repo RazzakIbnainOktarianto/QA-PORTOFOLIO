@@ -6,18 +6,18 @@
 
 | Category | Coverage |
 |---|---:|
-| Positive | 11 |
-| Negative | 7 |
-| **Total Test Cases** | **18** |
+| Positive | 12 |
+| Negative | 8 |
+| **Total Test Cases** | **20** |
 
 ### Testing Approach
 
 | Category | Coverage |
 |---|---:|
-| Functional | 18 |
+| Functional | 20 |
 | Boundary | 2 |
-| Edge Case | 3 |
-| Business Rule | 4 |
+| Edge Case | 4 |
+| Business Rule | 5 |
 
 ---
 
@@ -749,5 +749,90 @@ And the cart subtotal is recalculated based on the valid quantity
 ### Expected Result
 
 The system prevents the combined product quantity from exceeding the available stock of 5 units. The user receives an appropriate stock availability message, and the cart remains in a valid state.
+
+---
+
+## TC-CART-019 — Preserve Cart After Logout and Login
+
+**Test Type:** Edge Case · Functional · Positive
+
+### Description
+
+Verify that a user's cart data is preserved after the user logs out and logs back into the same account.
+
+### Precondition
+
+- User account exists and is active.
+- User is logged in.
+- Cart is empty before adding the product.
+- Product is available for purchase.
+
+### Parameter
+
+| Parameter | Value |
+|---|---|
+| Product | Wireless Headphones |
+| Unit Price | $50 |
+| Quantity | 2 |
+| User | Registered User |
+
+### Test Steps
+
+```gherkin
+Given the user is logged in and has 2 Wireless Headphones in the cart
+When the user logs out and logs back into the same account
+Then the cart should contain 2 Wireless Headphones with the previously saved cart data
+And the cart subtotal should remain $100
+```
+
+### Expected Result
+
+- User is successfully logged out.
+- User can successfully log back into the same account.
+- The cart is restored with the previously added product.
+- Product quantity remains unchanged.
+- Cart subtotal remains consistent with the previous state.
+
+---
+
+## TC-CART-020 — Prevent Cart Data From Being Shared Between Users
+
+**Test Type:** Business Rule · Functional · Negative
+
+### Description
+
+Verify that cart data belonging to one user is not accessible when another user logs into a different account on the same application.
+
+### Precondition
+
+- User A account exists and is active.
+- User B account exists and is active.
+- User A has at least one product in the cart.
+- User A and User B are different accounts.
+
+### Parameter
+
+| Parameter | Value |
+|---|---|
+| User A | user_a@example.com |
+| User B | user_b@example.com |
+| Product | Wireless Headphones |
+| Quantity | 2 |
+
+### Test Steps
+
+```gherkin
+Given User A is logged in and has 2 Wireless Headphones in the cart
+When User A logs out and User B logs into a different account
+Then User B should not see User A's cart items
+And User B's cart should only contain products belonging to User B
+```
+
+### Expected Result
+
+- User A's cart data remains associated with User A's account.
+- User B cannot see User A's products or quantities.
+- User B's cart is independent from User A's cart.
+- No cart data is unintentionally shared between different user accounts.
 
 ---
